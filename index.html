@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cody Garden 全景导览</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+    body{
+            background:#0a0a0a;
+                overflow:hidden;
+                    font-family:system-ui, -apple-system, sans-serif;
+    }
+      /* 俯视图容器 */
+        .map-container{
+                position:relative;
+                    width:100vw;
+                        height:100vh;
+                            display:flex;
+                                align-items:center;
+                                    justify-content:center;
+        }
+          #map{
+                  max-width:100%;
+                      max-height:100%;
+                          object-fit:contain;
+                              user-select:none;
+          }
+            /* 灵动点击点 */
+              .spot{
+                      position:absolute;
+                          width:20px;
+                              height:20px;
+                                  border-radius:50%;
+                                      background:radial-gradient(circle, #0ef 0%, #0cf 50%, transparent 100%);
+                                          box-shadow:0 0 10px #0ef, 0 0 20px #0cf, 0 0 30px rgba(0,238,255,0.5);
+                                              transform:translate(-50%,-50%);
+                                                  cursor:pointer;
+                                                      transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                                                          animation:pulse 2.5s infinite ease-in-out;
+                                                              z-index:10;
+              }
+                @keyframes pulse{
+                        0%{transform:translate(-50%,-50%) scale(1); opacity:0.8;}
+                            50%{transform:translate(-50%,-50%) scale(1.2); opacity:1;}
+                                100%{transform:translate(-50%,-50%) scale(1); opacity:0.8;}
+                }
+                  .spot:hover{
+                          transform:translate(-50%,-50%) scale(1.4);
+                              box-shadow:0 0 15px #0ef, 0 0 30px #0cf, 0 0 45px rgba(0,238,255,0.7);
+                  }
+                    .spot.active{
+                            transform:translate(-50%,-50%) scale(3);
+                                opacity:0;
+                                    transition:transform 0.6s ease, opacity 0.6s ease;
+                    }
+                      /* 跳转过渡遮罩 */
+                        #transition{
+                                position:fixed;
+                                    top:0;left:0;
+                                        width:100vw;height:100vh;
+                                            background:#000;
+                                                opacity:0;
+                                                    pointer-events:none;
+                                                        transition:opacity 0.6s ease;
+                                                            z-index:100;
+                        }
+                          #transition.active{
+                                  opacity:1;
+                          }
+                          </style>
+                          </head>
+                          <body>
+                          <div class="map-container">
+                            <img id="map" src="maps/map.jpg" alt="校园俯视图">
+                              <!-- 13个灵动点，位置按你标注的百分比定位 -->
+                                <div class="spot" data-id="1" style="left:5%; top:92%"></div>
+                                  <div class="spot" data-id="2" style="left:27%; top:38%"></div>
+                                    <div class="spot" data-id="3" style="left:18%; top:37%"></div>
+                                      <div class="spot" data-id="4" style="left:33%; top:35%"></div>
+                                        <div class="spot" data-id="5" style="left:49%; top:36%"></div>
+                                          <div class="spot" data-id="6" style="left:82%; top:58%"></div>
+                                            <div class="spot" data-id="7" style="left:92%; top:52%"></div>
+                                              <div class="spot" data-id="8" style="left:87%; top:42%"></div>
+                                                <div class="spot" data-id="9" style="left:43%; top:88%"></div>
+                                                  <div class="spot" data-id="10" style="left:47%; top:56%"></div>
+                                                    <div class="spot" data-id="11" style="left:55%; top:57%"></div>
+                                                      <div class="spot" data-id="12" style="left:56%; top:68%"></div>
+                                                        <div class="spot" data-id="13" style="left:65%; top:56%"></div>
+                                                        </div>
+                                                        <div id="transition"></div>
+
+                                                        <script>
+                                                          const transition = document.getElementById('transition');
+                                                            document.querySelectorAll('.spot').forEach(spot => {
+                                                                    spot.addEventListener('click', () => {
+                                                                              const id = spot.dataset.id;
+                                                                                    // 触发灵动过渡：点放大消失 + 屏幕变黑
+                                                                                          spot.classList.add('active');
+                                                                                                transition.classList.add('active');
+                                                                                                      // 延迟跳转，让动画完成
+                                                                                                            setTimeout(() => {
+                                                                                                                        window.location.href = `panorama.html?id=${id}`;
+                                                                                                            }, 600);
+                                                                    });
+                                                            });
+                                                            </script>
+                                                            </body>
+                                                            </html>
+                                                            
+                                                                                                            })
+                                                                    })
+                                                            })
+                          }
+                        }
+                    }
+                  }
+                }
+              }
+          }
+        }
+    }
